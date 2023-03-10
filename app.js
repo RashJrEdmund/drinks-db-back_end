@@ -1,13 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/usersRoutes');
+const drinksRouter = require('./routes/drinksRoutes');
+const categoriesRouter = require('./routes/categoriesRoutes');
+const glassRouter = require('./routes/glassRoutes');
+const ingredientRouter = require('./routes/ingredientRoutes');
 
-var app = express();
+const relate = require("./database/relationships");
+
+const app = express();
+relate();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,8 +26,36 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// this is a simulation of api keys stored in some database
+
+const API_KEYS = ["1", "2", "3", "4", "5"];
+
+// ion know what this one below does
+// app.use(function(req, res, next) {
+//   console.log(`${new Date().toTimeString()}     ${req.originalUrl}`);
+//   next();
+// })
+
+// this is a middle-ware that make sures u have an api key. read middle wares
+
+app.use(function (req, res, next) {
+  const {apikey}  = req.query;
+  const key = req.get("x-api-key");
+  if(API_KEYS.includes(apikey) || API_KEYS.includes(key)) { // the second option is to check the x-api-key value on postman header section
+    next(); // this calls the next function to be ran
+  } else {
+    res.send("acces denied").statusCode(403); // this like the res.status(403) error codes
+  }
+});
+
+// middle ware ends here
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/drinks', drinksRouter);
+app.use('/categories', categoriesRouter);
+app.use('/glasses', glassRouter);
+app.use('/ingredients', ingredientRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

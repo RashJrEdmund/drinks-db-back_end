@@ -1,13 +1,13 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('.');
+const { DataTypes } = require("sequelize");
+const sequelize = require("./index");
 
-const Users = sequelize.define(
-  'user',
+const User = sequelize.define(
+  "user", // sequelize actually pluralizes these names
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primarykey: true,
+      primaryKey: true,
       allowNull: false,
     },
     first_name: {
@@ -37,4 +37,4 @@ const Users = sequelize.define(
   }
 );
 
-module.exports = Users;
+module.exports = User;
