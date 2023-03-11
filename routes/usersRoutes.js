@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require("../database/users")
+const User = require("../database/users");
+const bcrypt = require("bcrypt");
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
@@ -15,17 +16,34 @@ router.post('/', async function(req, res, next) {
     return;
   }
 
-  const newUser = await User.create({
-    first_name,
-    last_name,
-    email,
-    phone,
-    password,
-    api_key: Date.now(),
-    is_admin: false,
-  });
+  bcrypt.hash(password, +process.env.SALT_ROUNDS, async (err, hash) => {
+    if(err) {
+      res.status(500).send(err);
+    } else {
+      const newUser = await User.create({
+        first_name,
+        last_name,
+        email,
+        phone,
+        password: hash,
+        api_key: Date.now(),
+        is_admin: false,
+      });
+      res.send(newUser);
+    }
+  })
 
-  res.send(newUser);
+  // const newUser = await User.create({
+  //   first_name,
+  //   last_name,
+  //   email,
+  //   phone,
+  //   password,
+  //   api_key: Date.now(),
+  //   is_admin: false,
+  // });
+
+  // res.send(newUser);
 });
 
 router.get('/:id', async function(req, res, next) {
@@ -48,6 +66,7 @@ router.put('/:id', async function(req, res, next) {
       id: +req.params.id
     }
   });
+
   if(!user) {
     res.send(`userID ${req.params.id} does not Exits`);
     return;
