@@ -5,8 +5,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dotEnv = require("dotenv");
 const cors = require('cors');
-dotEnv.config();
+const swaggerUi = require("swagger-ui-express");
 
+const specs = require('./server.js');
+dotEnv.config();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/usersRoutes');
 const drinksRouter = require('./routes/drinksRoutes');
@@ -53,6 +55,13 @@ const API_KEYS = ["1", "2", "3", "4", "5"];
 // });
 
 // // middle ware ends here
+
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs, { explorer: true })
+);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
