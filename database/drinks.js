@@ -14,22 +14,16 @@ const Drink = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    decription: DataTypes.STRING,
+    decription: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     image_url: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     recipe: {
       type: DataTypes.STRING,
-    },
-    category_id: {
-      type: DataTypes.INTEGER,
-    },
-    ingredient_id: {
-      type: DataTypes.INTEGER,
-    },
-    glass_id: {
-      type: DataTypes.INTEGER,
     },
     is_alcoholic: DataTypes.BOOLEAN,
   },

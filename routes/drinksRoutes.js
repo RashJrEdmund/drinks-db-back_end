@@ -16,16 +16,12 @@ router.post('/', async function(req, res, next) {
     description,
     image_url,
     recipe,
-    category_id,
-    ingredient_id,
-    glass_id,
     is_alcoholic,
-    userid
   } = req.body;
 
   console.log('this req.body', req.body);
 
-  if (!name || !description || !image_url || !recipe /*|| category_id.length < 1 || ingredient_id.length < 1 || glass_id.length < 1 || !is_alcoholic || userid.length < 1 */) {
+  if (!name || !description || !image_url || !recipe || !is_alcoholic ) {
     res.send('{ Missing Drink Info }');
     return;
   }
@@ -35,11 +31,7 @@ router.post('/', async function(req, res, next) {
     description,
     image_url,
     recipe,
-    category_id,
-    ingredient_id,
-    glass_id,
     is_alcoholic,
-    userid
   });
 
   res.send(newDrink);
