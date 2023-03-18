@@ -2,52 +2,46 @@
  * @swagger
  * components:
  *   schemas:
- *     User:
+ *     Drink:
  *       type: object
  *       required:
- *         - password
- *         - email
+ *         - name
+ *         - description
+ *         - image_url
  *       properties:
  *         id:
  *           type: interger
- *           description: The auto-generated id of the user
- *         first_name:
+ *           description: The auto-generated id of the drink
+ *         name:
  *           type: string
- *           description: The first name of the user
- *         last_name:
+ *           description: The name of the drink
+ *         description:
  *           type: string
- *           description: The last name of the user
- *         password:
+ *           description: The drink's description
+ *         image_url:
  *           type: string
- *           description: The user password
- *         email:
+ *           description: A link for the drink's image
+ *         recipe:
  *           type: string
- *           description: The user email
- *         apikey:
- *           type: string
- *           description: The user's api key
- *         phone:
- *           type: string
- *           description: The user phone number
- *         is_admin:
+ *           description: The drink's recipe
+ *         is_alcoholic:
  *           type: boolean
- *           description: User priorities
+ *           description: whether or not the drink is alcoholic
  *         createdAt:
  *           type: string
  *           format: date
- *           description: The date the user was added
+ *           description: The date the drink was added
  *         updatedAt:
  *           type: string
  *           format: date
- *           description: The date the user was modified
+ *           description: The date the drink was modified
  *       example:
  *         id: 1
- *         first_name: first name
- *         last_name: last name
- *         password: 1234
- *         email: user@emai.com
- *         phone: + 212 232
- *         is_admin: false
+ *         name: name of the drink
+ *         description: describe the drink
+ *         image_url: link for an image of the drink
+ *         recipe: the drinks recipe
+ *         is_alcoholic: true
  *         createdAt: 2020-03-10T04:05:06.157Z
  *         updatedAt: 2020-03-10T04:05:06.157Z
  */
@@ -55,102 +49,102 @@
 /**
  * @swagger
  * tags:
- *   name: User
- *   description: The users managing API
- * /users:
+ *   name: Drink
+ *   description: The Drink From the API
+ * /drinks:
  *   get:
- *     summary: Lists all the users
- *     tags: [Users]
+ *     summary: Lists all the drinks
+ *     tags: [Drinks]
  *     responses:
  *       200:
- *         description: The list of the users
+ *         description: The list of the drinks
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/Drink'
  *   post:
- *     summary: Create a new user
- *     tags: [Users]
+ *     summary: Create a new drink
+ *     tags: [Drinks]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/Drink'
  *     responses:
  *       200:
- *         description: The created user.
+ *         description: The created drink.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/Drink'
  *       500:
  *         description: Some server error
- * /users/{id}:
+ * /drinks/{id}:
  *   get:
- *     summary: Get the user by id
- *     tags: [Users]
+ *     summary: Get the drink by id
+ *     tags: [Drinks]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The user id
+ *         description: The drink id
  *     responses:
  *       200:
- *         description: The user response by id
+ *         description: The drink response by id
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/Drink'
  *       404:
- *         description: The user was not found
+ *         description: The drink was not found
  *   put:
- *    summary: Update the user by the id
- *    tags: [Users]
+ *    summary: Update the drink by the id
+ *    tags: [Drinks]
  *    parameters:
  *      - in: path
  *        name: id
  *        schema:
  *          type: string
  *        required: true
- *        description: The user id
+ *        description: The drink id
  *    requestBody:
  *      required: true
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/User'
+ *            $ref: '#/components/schemas/Drink'
  *    responses:
  *      200:
- *        description: The user was updated
+ *        description: The drink was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/User'
+ *              $ref: '#/components/schemas/Drink'
  *      404:
- *        description: The user was not found
+ *        description: The drink was not found
  *      500:
  *        description: Some error happened
  *   delete:
- *     summary: Remove the user by id
- *     tags: [Users]
+ *     summary: Remove the drink by id
+ *     tags: [Drinks]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The user id
+ *         description: The drink id
  *
  *     responses:
  *       200:
- *         description: The user was deleted
+ *         description: The drink was deleted
  *       404:
- *         description: The user was not found
+ *         description: The drink was not found
  */
 
 const express = require('express');
