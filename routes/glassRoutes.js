@@ -136,83 +136,19 @@
 
 const express = require('express');
 const router = express.Router();
-const Glass = require("../database/glasses")
+const GlassController = require('../Controllers/GlassController');
 
 /* GET Glass listing. */
-router.get('/', async function(req, res, next) {
-  const allGlasses = await Glass.findAll();
-  res.send(allGlasses);
-});
+router.get('/', GlassController.getAllGlasses);
 
-// continue from here
+router.post('/', GlassController.createOneGlass);
 
-router.post('/', async function(req, res, next) {
-  const { name, size } = req.body;
+router.get('/:id', GlassController.getOneGlass);
 
-  if (!name || !size) {
-    res.send('{ Missing Glass Info }');
-    return;
-  }
+router.put('/:id', GlassController.putOneGlass);
 
-  const newGlass = await Glass.create({ name, size });
+router.patch('/:id', GlassController.patchOneGlass);
 
-  res.send(newGlass);
-});
-
-router.get('/:id', async function(req, res, next) {
-  const [Glass] = await Glass.findAll({ // this to make sure the glass even exits
-    where: {
-      id: +req.params.id
-    }
-  });
-  if(!Glass) {
-    res.send(`GlassID ${req.params.id} does not Exits`);
-    return;
-  }
-
-  res.send(Glass);
-});
-
-router.put('/:id', async function(req, res, next) {
-  const [Glass] = await Glass.findAll({ // this to make sure the glass even exits
-    where: {
-      id: +req.params.id
-    }
-  });
-  if(!Glass) {
-    res.send(`GlassID ${req.params.id} does not Exits`);
-    return;
-  }
-
-  await Glass.update(req.body, {where: {
-    id: req.params.id
-  }})
-
-  const overWrittenGlass = await Glass.findAll({where: { id: req.params.id}})
-  res.send(overWrittenGlass)
-});
-
-router.patch('/:id', async function(req, res, next) {
-  const [Glass] = await Glass.findAll({ // this to make sure the glass even exits
-    where: {
-      id: +req.params.id
-    }
-  });
-  if(!Glass) {
-    res.send(`GlassID ${req.params.id} does not Exits`);
-    return;
-  }
-
- await Glass.update(req.body, { where: { id: req.params.id}})
- updatedGlass = await Glass.findAll( { where: { id: req.params.id } })
-  res.send(updatedGlass);
-});
-
-router.delete('/:id', async function(req, res, next) {
-  await Glass.destroy({
-    where: { id: +req.params.id }
-  });
-  res.send(`GlassId ${req.params.id} dropped!`);
-});
+router.delete('/:id', GlassController.deleteOneGlass);
 
 module.exports = router;
