@@ -15,7 +15,7 @@ const Drink = sequelize.define(
       allowNull: false,
     },
     decription: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     image_url: {
@@ -23,7 +23,7 @@ const Drink = sequelize.define(
       allowNull: false,
     },
     recipe: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     is_alcoholic: DataTypes.BOOLEAN,
   },

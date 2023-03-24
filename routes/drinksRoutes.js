@@ -154,7 +154,7 @@ const DrinksController = require('../Controllers/DrinksController');
 /* GET drinks listing. */
 router.get('/', DrinksController.getAllDrinks);
 
-router.post('/', DrinksController.postOneDrink);
+router.post('/', DrinksController.createOneDrink);
 
 router.get('/:id', DrinksController.getOneDrink);
 

@@ -7,7 +7,7 @@ const dotEnv = require("dotenv");
 const cors = require('cors');
 const swaggerUi = require("swagger-ui-express");
 
-const specs = require('./server.js');
+const specs = require('./swaggerServer.js');
 dotEnv.config();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/usersRoutes');
@@ -44,15 +44,15 @@ const API_KEYS = ["1", "2", "3", "4", "5"];
 
 // this is a middle-ware that make sures u have an api key. read middle wares
 
-app.use(function (req, res, next) {
-  const {apikey}  = req.query;
-  const key = req.get("x-api-key");
-  if(API_KEYS.includes(apikey) || API_KEYS.includes(key)) { // the second option is to check the x-api-key value on postman header section
-    next(); // this calls the next function to be ran
-  } else {
-    res.send("acces denied").statusCode(403); // this like the res.status(403) error codes
-  }
-});
+// app.use(function (req, res, next) {
+//   const {apikey}  = req.query;
+//   const key = req.get("x-api-key");
+//   if(API_KEYS.includes(apikey) || API_KEYS.includes(key)) { // the second option is to check the x-api-key value on postman header section
+//     next(); // this calls the next function to be ran
+//   } else {
+//     res.send("acces denied").statusCode(403); // this like the res.status(403) error codes
+//   }
+// });
 
 // middle ware ends here
 

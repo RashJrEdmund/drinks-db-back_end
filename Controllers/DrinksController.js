@@ -5,7 +5,7 @@ const getAllDrinks = async (req, res, next) => {
   res.send(allDrinks);
 }
 
-const postOneDrink = async (req, res, next) => {
+const createOneDrink = async (req, res, next) => {
   const{
     name,
     description,
@@ -16,7 +16,7 @@ const postOneDrink = async (req, res, next) => {
 
   console.log('this req.body', req.body);
 
-  if (!name || !description || !image_url || !recipe || !is_alcoholic ) {
+  if (!name || !description || !image_url || !recipe || is_alcoholic == null ) {
     res.send('{ Missing Drink Info }');
     return;
   }
@@ -90,7 +90,7 @@ const deleteOneDrink = async (req, res, next) => {
 
 module.exports = {
   getAllDrinks,
-  postOneDrink,
+  createOneDrink,
   getOneDrink,
   putOneDrink,
   patchOneDrink,
