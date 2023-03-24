@@ -16,7 +16,7 @@ const createOneDrink = async (req, res, next) => {
 
   console.log('this req.body', req.body);
 
-  if (!name || !description || !image_url || !recipe || is_alcoholic == null ) {
+  if (!name || !description || !image_url || !recipe) {
     res.send('{ Missing Drink Info }');
     return;
   }

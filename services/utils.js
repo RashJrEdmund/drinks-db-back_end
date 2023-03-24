@@ -1,4 +1,8 @@
 const User = require('../database/users');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const { JWT_PRIVATE_KEY } = require('../services/constant');
 
 const loginWithEmailPassword = async (email, password) => {
   let user = await User.findOne({
@@ -23,6 +27,8 @@ const loginWithEmailPassword = async (email, password) => {
 
   return { user, token }
 }
+
+loginWithEmailPassword('rash23307@gmail.com', '1234').then((res) => console.log(res));
 
 module.exports = {
   loginWithEmailPassword

@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const User = require("../database/users");
-const { JWT_PRIVATE_KEY } = require('../services/constant');
 
 const {
   loginWithEmailPassword
