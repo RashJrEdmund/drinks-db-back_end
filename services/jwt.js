@@ -3,12 +3,10 @@ const { JWT_PRIVATE_KEY } = require("./constant");
 
 function signToken(data) {
   return jwt.sign(
-    {
-      data,
-    },
+    { data },
     JWT_PRIVATE_KEY,
-    { expiresIn: 60 * 60 }
-  );
+    { expiresIn: '1h' }
+  )
 }
 
 function verifyToken(token) {
