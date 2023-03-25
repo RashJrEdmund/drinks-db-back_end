@@ -11,7 +11,7 @@ const loginWithEmailPassword = async (email, password) => {
     }
   });
 
-  if(!user) return { status: 401 };
+  if(!user) return { status: 401, message: 'user not found' };
 
   user = user.dataValues || user; // since users gives a complex object(proxy) with unneccesary key value pairs
 
@@ -28,7 +28,7 @@ const loginWithEmailPassword = async (email, password) => {
   return { user, token }
 }
 
-loginWithEmailPassword('rash23307@gmail.com', '1234').then((res) => console.log(res));
+// loginWithEmailPassword('godden@gmail.com', '1234').then((res) => console.log(res));
 
 module.exports = {
   loginWithEmailPassword

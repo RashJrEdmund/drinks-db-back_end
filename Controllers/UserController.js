@@ -1,5 +1,6 @@
 const User = require("../database/users");
 const bcrypt = require("bcrypt");
+const uuid = require('uuid');
 
 const getAllUsers = async (req, res, next) => {
   const allUsers = await User.findAll();
@@ -13,6 +14,14 @@ const createOneUser = async (req, res, next) => {
     return;
   }
 
+  const duplicateUser = await User.findOne({
+    where: {
+      email: email,
+    }
+  });
+
+  if(duplicateUser) return res.status(401).send(`user_email: ${email} already exist`);
+
   bcrypt.hash(password, +process.env.SALT_ROUNDS, async (err, hash) => {
     if(err) {
       res.status(500).send(err);
@@ -23,24 +32,12 @@ const createOneUser = async (req, res, next) => {
         email,
         phone,
         password: hash,
-        api_key: Date.now(),
+        apikey: uuid.v4(),
         is_admin: false,
       });
       res.send(newUser);
     }
-  })
-
-  // const newUser = await User.create({
-  //   first_name,
-  //   last_name,
-  //   email,
-  //   phone,
-  //   password,
-  //   api_key: Date.now(),
-  //   is_admin: false,
-  // });
-
-  // res.send(newUser);
+  });
 }
 
 const getOneUser = async (req, res, next) => {
@@ -53,6 +50,9 @@ const getOneUser = async (req, res, next) => {
     res.send(`userID ${req.params.id} does not Exits`);
     return;
   }
+
+  delete user.password;
+  delete user.apikey;
 
   res.send(user);
 }

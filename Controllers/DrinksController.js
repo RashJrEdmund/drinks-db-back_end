@@ -14,8 +14,6 @@ const createOneDrink = async (req, res, next) => {
     is_alcoholic,
   } = req.body;
 
-  console.log('this req.body', req.body);
-
   if (!name || !description || !image_url || !recipe) {
     res.send('{ Missing Drink Info }');
     return;
@@ -28,6 +26,8 @@ const createOneDrink = async (req, res, next) => {
     recipe,
     is_alcoholic,
   });
+
+  console.log('\n \n this newDrink', newDrink);
 
   res.send(newDrink);
 }
