@@ -22,7 +22,7 @@ const loginWithEmailPassword = async (email, password) => {
   const token = jwt.sign(
     { barer_id: user.id, barer_email: user.email }, // giving the token barer his normal id, and email as barer_id / barer_email so i'll use it as reference when i want to log in with token
     JWT_PRIVATE_KEY,
-    { expiresIn: '1h' }
+    { expiresIn: 30 }
   );
 
   return { user, token }

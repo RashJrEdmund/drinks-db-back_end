@@ -23,20 +23,18 @@ const createOneUser = async (req, res, next) => {
   if(duplicateUser) return res.status(401).send(`user_email: ${email} already exist`);
 
   bcrypt.hash(password, +process.env.SALT_ROUNDS, async (err, hash) => {
-    if(err) {
-      res.status(500).send(err);
-    } else {
-      const newUser = await User.create({
-        first_name,
-        last_name,
-        email,
-        phone,
-        password: hash,
-        apikey: uuid.v4(),
-        is_admin: false,
-      });
-      res.send(newUser);
-    }
+    if(err) return res.status(500).send(err);
+
+    const newUser = await User.create({
+      first_name,
+      last_name,
+      email,
+      phone,
+      password: hash,
+      apikey: uuid.v4(),
+      is_admin: false,
+    });
+    res.send(newUser);
   });
 }
 
