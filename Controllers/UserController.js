@@ -44,6 +44,7 @@ const getOneUser = async (req, res, next) => {
       id: +req.params.id
     }
   });
+
   if(!user) {
     res.send(`userID ${req.params.id} does not Exits`);
     return;
@@ -61,6 +62,7 @@ const putOneUser = async (req, res, next) => {
       id: +req.params.id
     }
   });
+
 
   if(!user) {
     res.send(`userID ${req.params.id} does not Exits`);
@@ -81,6 +83,7 @@ const patchOneUser = async (req, res, next) => {
       id: +req.params.id
     }
   });
+  console.log('this user \n', user, '\n \n');
   if(!user) {
     res.send(`userID ${req.params.id} does not Exits`);
     return;
@@ -89,6 +92,7 @@ const patchOneUser = async (req, res, next) => {
  await User.update(req.body, { where: { id: req.params.id}})
  updatedUser = await User.findAll( { where: { id: req.params.id } })
   res.send(updatedUser);
+  console.log('updataeduser \n', updatedUser);
 }
 
 const deleteOneUser = async (req, res, next) => {

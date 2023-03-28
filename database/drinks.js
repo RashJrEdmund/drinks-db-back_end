@@ -17,6 +17,7 @@ const Drink = sequelize.define(
     decription: {
       type: DataTypes.TEXT,
       allowNull: false,
+
     },
     image_url: {
       type: DataTypes.STRING,
