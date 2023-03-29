@@ -18,16 +18,11 @@ router.post('/login', async (req, res) => {
 
   if(result.status === 401) return res.status(401).send(result.message); // since loginWith... returns either a { status: 401 } || the user and the created user and his token
 
-  // const { createdAt } = result.user;
-  // const day = createdAt.split('-').pop().split('T').shift();
-  // const month = createdAt.split('-')[1];
-  // const year = createdAt.split('-')[0]
-
-  // const joinedSince = `${day}-${month}-${year}`
-
   let { user } = result
   delete user.password;
   delete user.apikey
+  delete user.deletedAt
+  delete user.updatedAt
   res.send(result);
   // this way the user's password and apikey are not sent to the fontend
 });

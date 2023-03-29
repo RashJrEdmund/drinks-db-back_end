@@ -39,7 +39,7 @@ const createOneUser = async (req, res, next) => {
 }
 
 const getOneUser = async (req, res, next) => {
-  const [user] = await User.findAll({ // this to make sure the user exits
+  let user = await User.findOne({ // this to make sure the user exits
     where: {
       id: +req.params.id
     }
@@ -50,14 +50,18 @@ const getOneUser = async (req, res, next) => {
     return;
   }
 
+  user = user.dataValues
+
   delete user.password;
-  delete user.apikey;
+  delete user.apikey
+  delete user.deletedAt
+  delete user.updatedAt
 
   res.send(user);
 }
 
 const putOneUser = async (req, res, next) => {
-  const [user] = await User.findAll({ // this to make sure the user exits
+  const user = await User.findOne({ // this to make sure the user exits
     where: {
       id: +req.params.id
     }
@@ -73,26 +77,37 @@ const putOneUser = async (req, res, next) => {
     id: req.params.id
   }})
 
-  const overWrittenUser = await User.findAll({where: { id: req.params.id}})
+  const overWrittenUser = await User.findOne({where: { id: req.params.id}});
   res.send(overWrittenUser)
 }
 
 const patchOneUser = async (req, res, next) => {
-  const [user] = await User.findAll({ // this to make sure the user exits
+  const user = await User.findOne({ // this to make sure the user exits
     where: {
       id: +req.params.id
     }
   });
-  console.log('this user \n', user, '\n \n');
+
+  console.log('this req.body \n', req.body, '\n \n');
+
   if(!user) {
     res.send(`userID ${req.params.id} does not Exits`);
     return;
   }
 
- await User.update(req.body, { where: { id: req.params.id}})
- updatedUser = await User.findAll( { where: { id: req.params.id } })
+ await User.update(req.body, { where: { id: req.params.id}});
+
+ updatedUser = await User.findOne( { where: { id: req.params.id } });
+
+ updatedUser = updatedUser.dataValues
+
+  delete updatedUser.password;
+  delete updatedUser.apikey
+  delete updatedUser.deletedAt
+  delete updatedUser.updatedAt
+
   res.send(updatedUser);
-  console.log('updataeduser \n', updatedUser);
+  console.log('\n this updated User \n', updatedUser);
 }
 
 const deleteOneUser = async (req, res, next) => {
