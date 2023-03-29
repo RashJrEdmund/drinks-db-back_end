@@ -26,4 +26,8 @@ router.post('/login', async (req, res) => {
   // this way the user's password and apikey are not sent to the fontend
 });
 
+router.get('/current-user', (req, res) => {
+  res.send(req.user)
+})
+
 module.exports = router;

@@ -20,4 +20,22 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = { authMiddleware };
+const authApiKey = async (req, res, next) => {
+  const API_KEY = req.header('x-api-key');
+  if (!API_KEY) return res.sendStatus(401);
+
+  const user = await User.findOne({ where: { apikey: API_KEY } });
+
+  if(!user) return res.sendStatus(401);
+
+  req.user = user;
+  next();
+}
+
+const authAdmin = async (req, res, next) => {
+  if(!req.user.is_admin) return res.sendStatus(401);
+
+  next();
+}
+
+module.exports = { authMiddleware, authApiKey };
