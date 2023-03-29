@@ -20,7 +20,6 @@ router.post('/login', async (req, res) => {
 
   let { user } = result
   delete user.password;
-  delete user.apikey
   delete user.deletedAt
   delete user.updatedAt
   res.send(result);
