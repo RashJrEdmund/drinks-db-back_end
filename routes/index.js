@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { authMiddleware } = require('../services/auth');
+
 const {
   loginWithEmailPassword
 } = require('../services/utils');
@@ -14,8 +16,6 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const result = await loginWithEmailPassword(email, password); // getting an err and it shows that password must be a string
 
-  console.log('\n next part entered \n', result, email, password);
-
   if(result.status === 401) return res.status(401).send(result.message); // since loginWith... returns either a { status: 401 } || the user and the created user and his token
 
   let { user } = result
@@ -26,7 +26,7 @@ router.post('/login', async (req, res) => {
   // this way the user's password and apikey are not sent to the fontend
 });
 
-router.get('/current-user', (req, res) => {
+router.get('/current-user', authMiddleware, (req, res) => {
   res.send(req.user)
 })
 

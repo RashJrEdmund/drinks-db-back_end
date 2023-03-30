@@ -102,7 +102,6 @@ const patchOneUser = async (req, res, next) => {
  updatedUser = updatedUser.dataValues
 
   delete updatedUser.password;
-  delete updatedUser.apikey
   delete updatedUser.deletedAt
   delete updatedUser.updatedAt
 

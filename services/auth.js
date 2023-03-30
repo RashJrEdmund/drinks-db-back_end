@@ -1,4 +1,4 @@
-const User = require("../database/user");
+const User = require("../database/users");
 const { verifyToken } = require("./jwt");
 
 const authMiddleware = async (req, res, next) => {
@@ -38,4 +38,4 @@ const authAdmin = async (req, res, next) => {
   next();
 }
 
-module.exports = { authMiddleware, authApiKey };
+module.exports = { authMiddleware, authApiKey, authAdmin };
