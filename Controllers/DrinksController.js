@@ -82,10 +82,13 @@ const patchOneDrink = async (req, res, next) => {
 }
 
 const deleteOneDrink = async (req, res, next) => {
+  const drink = await Drink.findOne({ where: { id: +req.params.id }});
+  if(!drink) return res.status(401).send('drink not found');
+
   await Drink.destroy({
     where: { id: +req.params.id }
   });
-  res.send(`DrinkId ${req.params.id} dropped!`);
+  res.status(200).send('drink remove 😌');
 }
 
 module.exports = {
