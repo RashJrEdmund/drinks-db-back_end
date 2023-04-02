@@ -28,7 +28,7 @@ const loginWithEmailPassword = async (email, password) => {
   return { user, token }
 }
 
-// loginWithEmailPassword('godden@gmail.com', '1234').then((res) => console.log(res));
+loginWithEmailPassword('godden@gmail.com', '1234').then((res) => console.log(res));
 
 module.exports = {
   loginWithEmailPassword

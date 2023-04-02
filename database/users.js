@@ -14,7 +14,9 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+
     last_name: DataTypes.STRING,
+
     password: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -23,12 +25,13 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       unique: true,
     },
-    apikey: {
-      type: DataTypes.STRING,
-    },
-    phone: {
-      type: DataTypes.INTEGER,
-    },
+
+    image_url: DataTypes.STRING,
+
+    apikey:  DataTypes.STRING,
+
+    phone: DataTypes.STRING,
+
     is_admin: DataTypes.BOOLEAN,
   },
   {
