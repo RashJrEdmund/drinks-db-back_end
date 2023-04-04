@@ -27,6 +27,10 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/current-user', authMiddleware, (req, res) => {
+  let { user } = result
+  delete user.password;
+  delete user.deletedAt
+  delete user.updatedAt
   res.send(req.user)
 })
 

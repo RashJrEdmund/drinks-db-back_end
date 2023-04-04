@@ -1,8 +1,7 @@
 const User = require('../database/users');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
-const { JWT_PRIVATE_KEY } = require('../services/constant');
+const { signToken } = require('./jwt');
 
 const loginWithEmailPassword = async (email, password) => {
   let user = await User.findOne({
@@ -19,16 +18,12 @@ const loginWithEmailPassword = async (email, password) => {
 
   if(!match) return { status: 401, message: 'incorrect logins' };
 
-  const token = jwt.sign(
-    { barer_id: user.id, barer_email: user.email }, // giving the token barer his normal id, and email as barer_id / barer_email so i'll use it as reference when i want to log in with token
-    JWT_PRIVATE_KEY,
-    { expiresIn: 30 }
-  );
+  const token = signToken(user)
 
   return { user, token }
 }
 
-loginWithEmailPassword('godden@gmail.com', '1234').then((res) => console.log(res));
+// loginWithEmailPassword('rash@gmail.com', '1234').then((res) => console.log(res));
 
 module.exports = {
   loginWithEmailPassword

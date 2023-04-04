@@ -6,10 +6,11 @@ const authMiddleware = async (req, res, next) => {
   const token = authorization?.split(" ").pop();
 
   if (token) {
+    console.log('\n this toke', token, '\n');
     try {
-      const { data } = verifyToken(token);
-      const user = await User.findByPk(data.id);
-      if (!user) return res.sendStatus(401);
+      const bearer = verifyToken(token);
+      const user = await User.findByPk(bearer.bearer_id);
+      if (!user) return res.send('{usser does not exist');
       req.user = user;
       next();
     } catch (e) {

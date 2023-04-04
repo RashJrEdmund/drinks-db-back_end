@@ -67,6 +67,7 @@ const putOneUser = async (req, res, next) => {
     }
   });
 
+  console.log('these are files \n', req.filse);
 
   if(!user) {
     res.send(`userID ${req.params.id} does not Exits`);

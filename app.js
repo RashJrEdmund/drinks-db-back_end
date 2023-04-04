@@ -6,6 +6,7 @@ const logger = require('morgan');
 const dotEnv = require("dotenv");
 const cors = require('cors');
 const swaggerUi = require("swagger-ui-express");
+const fileUpload = require('express-fileupload')
 
 const specs = require('./swaggerServer.js');
 dotEnv.config();
@@ -21,6 +22,7 @@ const relate = require("./database/relationships");
 const app = express();
 relate();
 app.use(cors());
+app.use(fileUpload())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
