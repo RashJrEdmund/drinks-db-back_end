@@ -15,6 +15,7 @@ router.get('/', function(req, res, next) {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const result = await loginWithEmailPassword(email, password); // getting an err and it shows that password must be a string
+  console.log('\n \n', result)
 
   if(result.status === 401) return res.status(401).send(result.message); // since loginWith... returns either a { status: 401 } || the user and the created user and his token
 
@@ -27,11 +28,12 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/current-user', authMiddleware, (req, res) => {
-  let { user } = result
+  let { user } = req
   delete user.password;
   delete user.deletedAt
   delete user.updatedAt
-  res.send(req.user)
+  console.log('this user from current-user', user);
+  res.send(user)
 })
 
 module.exports = router;
