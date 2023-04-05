@@ -32,7 +32,6 @@ router.get('/current-user', authMiddleware, (req, res) => {
   delete user.password;
   delete user.deletedAt
   delete user.updatedAt
-  console.log('this user from current-user', user);
   res.send(user)
 })
 
