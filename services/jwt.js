@@ -11,7 +11,6 @@ const  signToken = (user) => {
 
 const verifyToken = (token) => {
   return jwt.verify(token, JWT_PRIVATE_KEY)
-    // return verif;
 }
 
 module.exports = { signToken, verifyToken };
