@@ -19,6 +19,8 @@ const createOneDrink = async (req, res, next) => {
     return;
   }
 
+  console.log('\n \n this drink', {name, description, image_url, recipe, is_alcoholic})
+
   const newDrink = await Drink.create({
     name,
     description,
