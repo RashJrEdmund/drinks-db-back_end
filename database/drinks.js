@@ -14,7 +14,7 @@ const Drink = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    decription: {
+    description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },

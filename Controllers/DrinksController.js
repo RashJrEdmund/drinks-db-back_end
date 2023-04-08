@@ -12,6 +12,7 @@ const createOneDrink = async (req, res, next) => {
     image_url,
     recipe,
     is_alcoholic,
+    userId,
   } = req.body;
 
   if (!name || !description || !image_url || !recipe) {
@@ -27,6 +28,7 @@ const createOneDrink = async (req, res, next) => {
     image_url,
     recipe,
     is_alcoholic,
+    userId,
   });
 
   console.log('\n \n this newDrink', newDrink);
