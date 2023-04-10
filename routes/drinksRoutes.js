@@ -24,6 +24,9 @@
  *         recipe:
  *           type: string
  *           description: The drink's recipe
+ *         userId:
+ *           type: string
+ *           description: the id of the user that created the drink
  *         is_alcoholic:
  *           type: boolean
  *           description: whether or not the drink is alcoholic
@@ -41,6 +44,7 @@
  *         description: describe the drink
  *         image_url: link for an image of the drink
  *         recipe: the drinks recipe
+ *         userId: 1
  *         is_alcoholic: true
  *         createdAt: 2020-03-10T04:05:06.157Z
  *         updatedAt: 2020-03-10T04:05:06.157Z
