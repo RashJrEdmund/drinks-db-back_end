@@ -2,6 +2,10 @@ const Drink = require("../database/drinks");
 
 const getAllDrinks = async (req, res, next) => {
   const allDrinks = await Drink.findAll();
+  allDrinks.forEach(drink => {
+    drink.recipe = drink.recipe.split('_/-/_');
+  })
+
   res.send(allDrinks);
 }
 
