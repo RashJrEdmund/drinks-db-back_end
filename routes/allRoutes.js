@@ -1,3 +1,45 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     All:
+ *       type: object
+ *       properties:
+ *         Drinks:
+ *           type: object
+ *           description: all drinks in the database
+ *         Categories:
+ *           type: object
+ *           description: all categories in the database
+ *         Ingredients:
+ *           type: object
+ *           description: all ingredients in the database
+ *         Glasses:
+ *           type: object
+ *           description: all glasses in the database
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: All
+ *   description: all drinks, categories, ingredients and glasses from the API
+ * /all:
+ *   get:
+ *     summary: Lists all drinks, categories, ingredients and glasses from the API
+ *     tags: [all]
+ *     responses:
+ *       200:
+ *         description: The list of all drinks, categories, ingredients and glasses from the API
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *             $ref: '#/components/schemas/all'
+ */
+
+
 const express = require('express');
 const router = express.Router();
 
