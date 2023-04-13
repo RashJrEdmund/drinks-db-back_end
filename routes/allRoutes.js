@@ -7,6 +7,8 @@ const Ingredient = require('../database/ingredients');
 const Glass = require('../database/glasses');
 
 const getAllDrinks = async () => {
+  console.log('\n get all drinks entered \n');
+
   const allDrinks = await Drink.findAll();
   allDrinks.forEach(drink => {
     drink.recipe = drink.recipe.split('_/-/_');
@@ -15,28 +17,13 @@ const getAllDrinks = async () => {
   return allDrinks;
 }
 
-const getAllCategories = async (req, res, next) => {
-  const allCategorys = await Category.findAll();
-  return allCategorys;
-}
+router.get('/', async (req, res) => {
+  const Drinks = await getAllDrinks();
+  const Categories = await Category.findAll();
+  const Ingredients = await Ingredient.findAll();
+  const Glasses =  await Glass.findAll();
 
-const getAllIngredients = async (req, res, next) => {
-  const allIngredientes = await Ingredient.findAll();
-  return allIngredientes;
-};
-
-const getAllGlasses = async (req, res, next) => {
-  const allGlasses = await Glass.findAll();
-  return allGlasses;
-}
-
-router.get('/', (req, res) => {
-  const drinks = getAllDrinks();
-  const categories = getAllCategories();
-  const ingredients = getAllIngredients();
-  const glasses = getAllGlasses();
-
-  res.send([...drinks, ...categories, ...ingredients, ...glasses])
+  res.send({Drinks, Categories, Ingredients, Glasses})
 });
 
 module.exports = router;
