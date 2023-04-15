@@ -49,8 +49,6 @@ const Ingredient = require('../database/ingredients');
 const Glass = require('../database/glasses');
 
 const getAllDrinks = async () => {
-  console.log('\n get all drinks entered \n');
-
   const allDrinks = await Drink.findAll();
   allDrinks.forEach(drink => {
     drink.recipe = drink.recipe.split('_/-/_');
