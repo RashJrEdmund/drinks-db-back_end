@@ -23,6 +23,7 @@ router.post('/login', async (req, res) => {
   delete user.password;
   delete user.deletedAt
   delete user.updatedAt
+  delete result.user;
   res.send(result);
   // this way the user's password and apikey are not sent to the fontend
 });

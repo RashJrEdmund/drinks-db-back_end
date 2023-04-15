@@ -10,6 +10,8 @@ const getAllDrinks = async (req, res, next) => {
 }
 
 const createOneDrink = async (req, res, next) => {
+
+  console.log('\n \n create drink enter', req.body);
   const{
     name,
     description,
@@ -35,7 +37,7 @@ const createOneDrink = async (req, res, next) => {
     userId,
   });
 
-  console.log('\n \n this newDrink', newDrink);
+  console.log('\n \n create drink done', newDrink);
 
   res.send(newDrink);
 }
@@ -73,7 +75,7 @@ const putOneDrink = async (req, res, next) => {
   res.send(overWrittenDrink)
 }
 
-const patchOneDrink = async (req, res, next) => {
+const patchOneDrink = async (req, res) => {
   const [drink] = await Drink.findAll({ // this is to make sure that the drink even exits
     where: {
       id: +req.params.id
