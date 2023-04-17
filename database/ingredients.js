@@ -14,7 +14,7 @@ const Ingredient = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    decription: DataTypes.STRING,
+    description: DataTypes.STRING,
   },
 
   {
