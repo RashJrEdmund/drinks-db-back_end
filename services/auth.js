@@ -4,12 +4,10 @@ const { verifyToken } = require("./jwt");
 const authMiddleware = async (req, res, next) => {
   const authorization = req.get("Authorization");
   const token = authorization?.split(" ").pop();
-  console.log('this token \n\n', token);
 
   if (token) {
     try {
       const bearer = verifyToken(token);
-      console.log('this bearer \n\n', bearer);
       const user = await User.findByPk(bearer.bearer_id);
       if (!user) return res.sendStatus(401);
       req.user = user.dataValues || user;
@@ -37,7 +35,6 @@ const authApiKey = async (req, res, next) => {
 
 const authAdmin = async (req, res, next) => {
   if(!req.user.is_admin) return res.sendStatus(401);
-
   next();
 }
 

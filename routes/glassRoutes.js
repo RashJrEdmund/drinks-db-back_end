@@ -137,18 +137,19 @@
 const express = require('express');
 const router = express.Router();
 const GlassController = require('../Controllers/GlassController');
+const { authApiKey, authMiddleware, authAdmin } = require('../services/auth');
 
 /* GET Glass listing. */
-router.get('/', GlassController.getAllGlasses);
+router.get('/', authApiKey, GlassController.getAllGlasses);
 
-router.post('/', GlassController.createOneGlass);
+router.post('/', authMiddleware, authAdmin, GlassController.createOneGlass);
 
-router.get('/:id', GlassController.getOneGlass);
+router.get('/:id', authApiKey, GlassController.getOneGlass);
 
-router.put('/:id', GlassController.putOneGlass);
+router.put('/:id', authMiddleware, authAdmin, GlassController.putOneGlass);
 
-router.patch('/:id', GlassController.patchOneGlass);
+router.patch('/:id', authMiddleware, authAdmin, GlassController.patchOneGlass);
 
-router.delete('/:id', GlassController.deleteOneGlass);
+router.delete('/:id', authMiddleware, authAdmin, GlassController.deleteOneGlass);
 
 module.exports = router;

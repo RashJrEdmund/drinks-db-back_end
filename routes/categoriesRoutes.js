@@ -138,18 +138,19 @@
 const express = require('express');
 const router = express.Router();
 const CategoriesController = require('../Controllers/CategoriesController');
+const { authApiKey, authMiddleware, authAdmin } = require('../services/auth');
 
 /* GET Categorys listing. */
-router.get('/', CategoriesController.getAllCategories);
+router.get('/', authApiKey, CategoriesController.getAllCategories);
 
-router.post('/', CategoriesController.createOneCategory);
+router.post('/', authMiddleware, authAdmin, CategoriesController.createOneCategory);
 
-router.get('/:id', CategoriesController.getOneCategory);
+router.get('/:id', authApiKey, authAdmin, CategoriesController.getOneCategory);
 
-router.put('/:id', CategoriesController.putOneCategory);
+router.put('/:id', authMiddleware, authAdmin, CategoriesController.putOneCategory);
 
-router.patch('/:id', CategoriesController.patchOneCategory);
+router.patch('/:id', authMiddleware, authAdmin, CategoriesController.patchOneCategory);
 
-router.delete('/:id', CategoriesController.deleteOneCategory);
+router.delete('/:id', authMiddleware, authAdmin, CategoriesController.deleteOneCategory);
 
 module.exports = router;

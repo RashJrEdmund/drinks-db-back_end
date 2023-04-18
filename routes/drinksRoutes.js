@@ -154,18 +154,19 @@
 const express = require('express');
 const router = express.Router();
 const DrinksController = require('../Controllers/DrinksController');
+const { authApiKey, authMiddleware, authAdmin } = require('../services/auth');
 
 /* GET drinks listing. */
-router.get('/', DrinksController.getAllDrinks);
+router.get('/', authApiKey, DrinksController.getAllDrinks);
 
-router.post('/', DrinksController.createOneDrink);
+router.post('/', authMiddleware, authAdmin, DrinksController.createOneDrink);
 
-router.get('/:id', DrinksController.getOneDrink);
+router.get('/:id', authApiKey, DrinksController.getOneDrink);
 
-router.put('/:id', DrinksController.putOneDrink);
+router.put('/:id', authMiddleware, authAdmin, DrinksController.putOneDrink);
 
-router.patch('/:id', DrinksController.patchOneDrink);
+router.patch('/:id', authMiddleware, authAdmin, DrinksController.patchOneDrink);
 
-router.delete('/:id', DrinksController.deleteOneDrink);
+router.delete('/:id', authMiddleware, authAdmin, DrinksController.deleteOneDrink);
 
 module.exports = router;

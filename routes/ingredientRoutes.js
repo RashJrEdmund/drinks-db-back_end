@@ -137,17 +137,18 @@
 const express = require('express');
 const router = express.Router();
 const IngredientController = require('../Controllers/IngredientController');
+const { authApiKey, authMiddleware, authAdmin } = require('../services/auth');
 
-router.get('/', IngredientController.getAllIngredients);
+router.get('/', authApiKey, IngredientController.getAllIngredients);
 
-router.post('/', IngredientController.createOnIngredient);
+router.post('/', authMiddleware, authAdmin, IngredientController.createOnIngredient);
 
-router.get('/:id', IngredientController.getOneIngredient);
+router.get('/:id', authApiKey, IngredientController.getOneIngredient);
 
-router.put('/:id', IngredientController.putOneIngredient);
+router.put('/:id', authMiddleware, authAdmin, IngredientController.putOneIngredient);
 
-router.patch('/:id', IngredientController.patchOneIngredient);
+router.patch('/:id', authMiddleware, authAdmin, IngredientController.patchOneIngredient);
 
-router.delete('/:id', IngredientController.deleteOneIngredient);
+router.delete('/:id', authMiddleware, authAdmin, IngredientController.deleteOneIngredient);
 
 module.exports = router;
