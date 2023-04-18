@@ -10,8 +10,6 @@ const getAllDrinks = async (req, res, next) => {
 }
 
 const createOneDrink = async (req, res, next) => {
-
-  console.log('\n \n create drink enter', req.body);
   const{
     name,
     description,
@@ -26,8 +24,6 @@ const createOneDrink = async (req, res, next) => {
     return;
   }
 
-  console.log('\n \n this drink', {name, description, image_url, recipe, is_alcoholic})
-
   const newDrink = await Drink.create({
     name,
     description,
@@ -36,8 +32,6 @@ const createOneDrink = async (req, res, next) => {
     is_alcoholic,
     userId,
   });
-
-  console.log('\n \n create drink done', newDrink);
 
   res.send(newDrink);
 }

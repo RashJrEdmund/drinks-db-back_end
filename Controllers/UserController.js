@@ -67,8 +67,6 @@ const putOneUser = async (req, res, next) => {
     }
   });
 
-  console.log('these are files \n', req.filse);
-
   if(!user) {
     res.send(`userID ${req.params.id} does not Exits`);
     return;
@@ -89,8 +87,6 @@ const patchOneUser = async (req, res, next) => {
     }
   });
 
-  console.log('this req.body \n', req.body, '\n \n');
-
   if(!user) {
     res.send(`userID ${req.params.id} does not Exits`);
     return;
@@ -107,7 +103,6 @@ const patchOneUser = async (req, res, next) => {
   delete updatedUser.updatedAt
 
   res.send(updatedUser);
-  console.log('\n this updated User \n', updatedUser);
 }
 
 const deleteOneUser = async (req, res, next) => {

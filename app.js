@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // this is a simulation of api keys stored in some database
 
-const API_KEYS = ["1", "2", "3", "4", "5"];
+// const API_KEYS = ["1", "2", "3", "4", "5"];
 
 // ion know what this one below does
 // app.use(function(req, res, next) {

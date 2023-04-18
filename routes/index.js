@@ -15,7 +15,6 @@ router.get('/', function(req, res, next) {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const result = await loginWithEmailPassword(email, password); // getting an err and it shows that password must be a string
-  console.log('\n \n', result)
 
   if(result.status === 401) return res.status(401).send(result.message); // since loginWith... returns either a { status: 401 } || the user and the created user and his token
 
