@@ -157,7 +157,7 @@ const DrinksController = require('../Controllers/DrinksController');
 const { authApiKey, authMiddleware, authAdmin } = require('../services/auth');
 
 /* GET drinks listing. */
-router.get('/', authApiKey, DrinksController.getAllDrinks);
+router.get('/', DrinksController.getAllDrinks);
 
 router.post('/', authMiddleware, authAdmin, DrinksController.createOneDrink);
 
