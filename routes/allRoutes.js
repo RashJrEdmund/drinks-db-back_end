@@ -47,6 +47,7 @@ const Drink = require('../database/drinks');
 const Category = require('../database/categories');
 const Ingredient = require('../database/ingredients');
 const Glass = require('../database/glasses');
+const { authApiKey } = require('../services/auth');
 
 const getAllDrinks = async () => {
   const allDrinks = await Drink.findAll();
@@ -57,13 +58,18 @@ const getAllDrinks = async () => {
   return allDrinks;
 }
 
-router.get('/', async (req, res) => {
+const getAllItems = async (req, res) => {
+
+  console.log('\n \n getAllController entered \n \n');
+
   const Drinks = await getAllDrinks();
   const Categories = await Category.findAll();
   const Ingredients = await Ingredient.findAll();
   const Glasses =  await Glass.findAll();
 
-  res.send({Drinks, Categories, Ingredients, Glasses})
-});
+  res.send({Drinks, Categories, Ingredients, Glasses});
+}
+
+router.get('/', authApiKey, getAllItems);
 
 module.exports = router;

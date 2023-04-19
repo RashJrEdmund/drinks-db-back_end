@@ -156,18 +156,18 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require('../Controllers/UserController');
-const { authMiddleware } = require('../services/auth');
+const { authMiddleware, authAdmin } = require('../services/auth');
 
-router.get('/', authMiddleware, UserController.getAllUsers);
+router.get('/', authMiddleware, authAdmin, UserController.getAllUsers);
 
-router.post('/', UserController.createOneUser);
+router.post('/',authMiddleware, authAdmin, UserController.createOneUser);
 
-router.get('/:id', authMiddleware, UserController.getOneUser);
+router.get('/:id', authMiddleware, authAdmin, UserController.getOneUser);
 
-router.put('/:id', authMiddleware, UserController.putOneUser);
+router.put('/:id', authMiddleware, authAdmin, UserController.putOneUser);
 
-router.patch('/:id', authMiddleware, UserController.patchOneUser);
+router.patch('/:id', authMiddleware, authAdmin, UserController.patchOneUser);
 
-router.delete('/:id', authMiddleware, UserController.deleteOneUser);
+router.delete('/:id', authMiddleware, authAdmin, UserController.deleteOneUser);
 
 module.exports = router;
