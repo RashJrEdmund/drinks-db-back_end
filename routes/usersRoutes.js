@@ -160,7 +160,7 @@ const { authMiddleware, authAdmin } = require('../services/auth');
 
 router.get('/', authMiddleware, authAdmin, UserController.getAllUsers);
 
-router.post('/',authMiddleware, authAdmin, UserController.createOneUser);
+router.post('/', authMiddleware, authAdmin, UserController.createOneUser);
 
 router.get('/:id', authMiddleware, authAdmin, UserController.getOneUser);
 
