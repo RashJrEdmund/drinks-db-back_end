@@ -27,14 +27,14 @@ const authApiKey = async (req, res, next) => {
 
   const user = await User.findOne({ where: { apikey: API_KEY } });
 
-  if(!user) return res.sendStatus(401);
+  if (!user) return res.sendStatus(401);
 
   req.user = user;
   next();
 }
 
 const authAdmin = async (req, res, next) => {
-  if(!req.user.is_admin) return res.sendStatus(401);
+  if (!req.user.is_admin) return res.sendStatus(401);
   next();
 }
 

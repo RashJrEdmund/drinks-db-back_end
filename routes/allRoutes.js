@@ -60,14 +60,12 @@ const getAllDrinks = async () => {
 
 const getAllItems = async (req, res) => {
 
-  console.log('\n \n getAllController entered \n \n');
-
   const Drinks = await getAllDrinks();
   const Categories = await Category.findAll();
   const Ingredients = await Ingredient.findAll();
-  const Glasses =  await Glass.findAll();
+  const Glasses = await Glass.findAll();
 
-  res.send({Drinks, Categories, Ingredients, Glasses});
+  res.send({ Drinks, Categories, Ingredients, Glasses });
 }
 
 router.get('/', authApiKey, getAllItems);
