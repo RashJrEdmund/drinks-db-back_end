@@ -10,13 +10,13 @@ const loginWithEmailPassword = async (email, password) => {
     }
   });
 
-  if(!user) return { status: 401, message: 'incorrect logins' };
+  if (!user) return { status: 401, message: 'incorrect logins' };
 
   user = user.dataValues || user; // since users gives a complex object(proxy) with unneccesary key value pairs
 
   const match = await bcrypt.compare(password, user.password);
 
-  if(!match) return { status: 401, message: 'incorrect logins' };
+  if (!match) return { status: 401, message: 'incorrect logins' };
 
   const token = signToken(user)
 
